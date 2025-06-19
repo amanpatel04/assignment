@@ -34,35 +34,35 @@ const StudentEditPage = () => {
 
   return (
     <>
-      <div className="bg-slate-300 m-4">
-        <form method="post" ref={element} onSubmit={handleSubmit} encType="application/x-www-form-urlencoded">
-          <div>
+      <div className="m-4 w-6/12 mx-auto p-4 shadow-2xl rounded mt-30">
+        <form method="post" ref={element} onSubmit={handleSubmit} encType="application/x-www-form-urlencoded" className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-4 gap-2">
             <label htmlFor="firstName">First Name</label>
-            <input type="text" name="firstName" id="firstName" />
+            <input type="text" name="firstName" id="firstName" className="border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1"/>
             <label htmlFor="lastName">Last Name</label>
-            <input type="text" name="lastName" id="lastName" />
+            <input type="text" name="lastName" id="lastName" className="border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1" />
           </div>
-          <div>
-            <label htmlFor="handle">Handle</label>
-            <input type="text" name="handle" id="handle" readOnly />
+          <div className="grid grid-cols-4 gap-3">
+            <label htmlFor="handle" className="col-span-1">Handle</label>
+            <input type="text" name="handle" id="handle" readOnly className="col-span-3 border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1" />
           </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" />
+          <div className="grid grid-cols-4 gap-3">
+            <label htmlFor="email" className="col-span-1">Email</label>
+            <input type="email" name="email" id="email" className="col-span-3 border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1" />
           </div>
-          <div>
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input type="text" name="phoneNumber" id="phoneNumber" />
+          <div className="grid grid-cols-4 gap-3">
+            <label htmlFor="phoneNumber" className="col-span-1">Phone Number</label>
+            <input type="text" name="phoneNumber" id="phoneNumber" className="col-span-3 border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1" />
           </div>
-          <div>
-            <label htmlFor="rating">Rating</label>
-            <input type="text" name="rating" id="rating" readOnly />
-            <label htmlFor="maxRating">Max Rating</label>
-            <input type="text" name="maxRating" id="maxRating" readOnly />
+          <div className="grid grid-cols-4 gap-3">
+            <label htmlFor="rating" className="col-span-1">Rating</label>
+            <input type="text" name="rating" id="rating" readOnly className="col-span-3 border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1" />
+            <label htmlFor="maxRating" className="col-span-1">Max Rating</label>
+            <input type="text" name="maxRating" id="maxRating" readOnly className="col-span-3 border border-slate-200 rounded focus:outline-none focus:border focus:border-teal-400 pl-1"/>
           </div>
-          <div>
-            <button type="submit">Update</button>
-            <Link to="/students/"> Student Table </Link>
+          <div className="flex justify-center gap-10 mt-10">
+            <button type="submit" className="bg-teal-400 w-40 h-12 flex justify-center items-center rounded text-white font-semibold cursor-pointer">Update</button>
+            <Link to="/students/" className="bg-teal-400 w-40 h-12 flex justify-center items-center rounded text-white font-semibold "> Student Table </Link>
           </div>
         </form>
       </div>

@@ -1,6 +1,10 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import getUserInfo from "../utils/codeforceApi.js";
+import { getUserInfo } from "../utils/codeforceApi.js";
+import { syncContestByHandle } from "./contest.controllers.js";
+import { syncProblemonByHandle } from "./problem.controllers.js";
+import Contest from "../models/contest.models.js";
+import Problem from "../models/problem.model.js";
 
 import User from "../models/user.models.js";
 
@@ -59,6 +63,15 @@ export const addUserByHandle = asyncHandler(async (req, res) => {
     maxRating: apiRes.result[0].maxRating,
   });
 
+  if (user === null) {
+    return res
+      .status(404)
+      .json(new ApiResponse(404, null, "Unable to create user"));
+  }
+
+  syncContestByHandle(user.handle);
+  syncProblemonByHandle(user.handle);
+
   res.status(201).json(new ApiResponse(201, user, "User created successfully"));
 });
 
@@ -90,6 +103,16 @@ export const updateUserById = asyncHandler(async (req, res) => {
 });
 
 export const deleteUserById = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(id);
+  if (!user) {
+    res.status(404).json(new ApiResponse(404, null, "Invalid User"));
+  }
+
+  await Contest.deleteMany({ handle: user.handle });
+  await Problem.deleteMany({ handle: user.handle });
+
   await User.findByIdAndDelete(req.params.id);
   res.status(200).json(new ApiResponse(200, null, "User deleted successfully"));
 });
+

@@ -1,34 +1,8 @@
 import crypto from 'crypto'
+import { URLSearchParams } from 'url'
 
 const API_KEY = process.env.CODEFORCE_API_KEY
 const API_SECRET = process.env.CODEFORCE_API_SECRET
-
-const getUserInfo = async (handle) => {
-  const time = Math.floor(Date.now() / 1000)
-
-  const method = 'user.info'
-  const params = {
-    handles: handle,
-    apiKey: API_KEY,
-    time: time
-  }
-
-  const apiSig = generateApiSig(method, params, API_SECRET)
-
-  const urlParams = new URLSearchParams(params)
-  urlParams.append('apiSig', apiSig)
-
-  const url = `https://codeforces.com/api/${method}?${urlParams.toString()}`
-  
-  try {
-    const response = await fetch(url)
-    const data = await response.json()
-    return data
-  } catch (err) {
-    return null
-  }
-}
-
 function generateApiSig(method, params, apiSecret) {
   const rand = Math.random().toString(36).substring(2, 8);
   const sortedParams = Object.entries(params)
@@ -42,6 +16,62 @@ function generateApiSig(method, params, apiSecret) {
   return rand + hash;
 }
 
-export default getUserInfo
+const requestApi = (method, params) => {
+  return new Promise((resolve, reject) => {
+    
+    const apiSig = generateApiSig(method, params, API_SECRET)
+    const url = new URLSearchParams(params)
+    url.append('apiSig', apiSig)
+    let data = null
+    fetch(`https://codeforces.com/api/${method}?${url.toString()}`)
+      .then(response => response.json())
+      .then(data => {
+        resolve(data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
+export const getUserInfo = async (handle) => {
+  const time = Math.floor(Date.now() / 1000)
+
+  const method = 'user.info'
+  const params = {
+    handles: handle,
+    apiKey: API_KEY,
+    time: time
+  }
+  return await requestApi(method, params)
+}
+
+
+export const getUserRating = async (handle) => {
+  const time = Math.floor(Date.now() / 1000)
+
+  const method = 'user.rating'
+  const params = {
+    handle: handle,
+    apiKey: API_KEY,
+    time: time
+  }
+  
+  return await requestApi(method, params)
+}
+
+export const getSubmissionByHandle = async (handle) => {
+  const time = Math.floor(Date.now() / 1000)
+
+  const method = 'user.status'
+  const params = {
+    handle: handle,
+    apiKey: API_KEY,
+    time: time
+  }
+  
+  return await requestApi(method, params)
+}
+
 
 
