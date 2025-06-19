@@ -1,0 +1,86 @@
+**Object**
+**User** `Object form storing student`
+|  key    |   type   |   unique   |
+|---------|----------|------------|
+|firstName| String   | false      |
+|lastName | String   | false      |
+|email    | String   | false      |
+|phoneNumber|String  | false      |
+|handle   | String   | true       |
+|maxRating| Number   | false      |
+|rating   | Number   | false      |
+|timestamps| iso string | false   |
+
+**Problem**
+|  key    |   type   |   unique   |
+|---------|----------|------------|
+|contestId| String   | false      |
+|name     | String   | false      |
+|rating   | Number   | false      |
+|tags     |Array     | false      |
+|type     | String   | true       |
+|submitTime| Number  | false      |
+|handle   | String   | false      |
+|timestamps| iso string | false   |
+
+**Contest**
+|  key    |   type   |   unique   |
+|---------|----------|------------|
+|contestId| String   | false      |
+|contestName| String | false      |
+|handle   | String   | false      |
+|newRating| Number   | false      |
+|oldRating| Number   | true       |
+|rank     | Number  | false       |
+|ratingUpdateTimeSeconds| Number| false|
+|timestamps| iso string | false   |
+
+---
+
+### GET `/api/user/all`
+
+**Description:** To get all the user list for student table.
+
+**Return:** Array of user object
+
+---
+
+### GET `/api/user/handle?=<handle>`
+
+**Description:** To check wheather student already in database or valid handle or not
+
+**Return:** boolean value with message
+
+---
+
+### GET `/api/user/add?handle=<handle>`
+
+**Description:** Add student and sync with contests and problems
+
+**Return:** Success ro Failure value
+
+---
+
+### PUT `/api/user/update/<id>`
+
+**Description:** accept student updated value in body and update in database according to it
+
+**Return:** boolean value with message
+
+---
+
+### DELETE `/api/user/delete/<id>`
+
+**Description:** Delete student from database and sync with contests and problems
+
+**Return:** boolean value with message
+
+---
+
+### GET `/api/user/<id>`
+
+**Description:** find a student with ID in params
+
+**Return:** Return a user object
+
+---
