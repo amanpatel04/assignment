@@ -35,7 +35,7 @@
 |ratingUpdateTimeSeconds| Number| false|
 |timestamps| iso string | false   |
 
----
+<h2 align="center"> User Endpoint </h2>
 
 ### GET `/api/user/all`
 
@@ -83,4 +83,18 @@
 
 **Return:** Return a user object
 
----
+<h2 align="center"> Contest Endpoint </h2>
+
+### GET `/api/contest/list?handle=<handle>&day=<day>`
+
+**Description:** find contest having filter participated in contest day ago
+
+**Return:** return array of Contest object
+
+<h2 align="center"> Problem Endpoint </h2> 
+
+### GET `/api/problem/list?handle=<handle>&day=<day>`
+
+**Description:** find problem having filter submitted day ago
+
+**Return:** return array of Problem object
