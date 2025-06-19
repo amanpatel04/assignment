@@ -77,6 +77,10 @@ export const addUserByHandle = asyncHandler(async (req, res) => {
 
 export const isValidHandle = asyncHandler(async (req, res) => {
   const handle = req.query.handle;
+  const user = await User.exists({ handle: handle });
+  if (user !== null) {
+    return res.status(200).json(new ApiResponse(200, user, "User already exists"));
+  }
   const apiRes = await getUserInfo(handle);
   if (apiRes.status === "FAILED") {
     return res.status(404).json(new ApiResponse(404, null, "User not found"));

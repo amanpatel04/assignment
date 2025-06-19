@@ -5,7 +5,7 @@ import { getUserRating } from "../utils/codeforceApi.js";
 
 export const syncContestByHandle = async (handle) => {
   if (handle === "null") {
-    rreturn;
+    return;
   }
   const apiRes = await getUserRating(handle);
   for (let i = 0; i < apiRes.result.length; i++) {

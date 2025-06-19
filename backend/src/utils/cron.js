@@ -4,6 +4,8 @@ import { syncProblemonByHandle } from "../controllers/problem.controllers.js";
 import User from "../models/user.models.js";
 import Problem from "../models/problem.model.js";
 
+// nodemailer 
+
 const sendMail = (user) => {
   console.log(`sent mail to user ${user}`);
 };

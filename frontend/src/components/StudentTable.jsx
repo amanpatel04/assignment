@@ -55,7 +55,7 @@ const StudentTable = () => {
           if (data.status === "OK") {
             setHandleMessage("User Found");
           } else {
-            setHandleMessage("User Not Found");
+            setHandleMessage(data.message);
           }
         });
     }, 3000);
