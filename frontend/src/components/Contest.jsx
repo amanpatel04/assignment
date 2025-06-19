@@ -26,7 +26,7 @@ const Contest = () => {
     fetch(`/api/contest/list/?${params.toString()}`)
       .then((response) => response.json())
       .then((data) => {
-        data.data.reverse();
+        // data.data.reverse();
         setContests(data.data);
       });
   }, [contestDay, handle]);
@@ -127,7 +127,7 @@ const Contest = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">{contestList}</tbody>
+            <tbody className="divide-y divide-gray-100">{contestList.reverse()}</tbody>
           </table>
         </div>
       </section>
