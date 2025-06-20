@@ -1,5 +1,5 @@
 **Object**
-**User** `Object form storing student`
+**User** `Object for storing student`
 |  key    |   type   |   unique   |
 |---------|----------|------------|
 |firstName| String   | false      |
